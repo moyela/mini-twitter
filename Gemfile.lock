@@ -114,6 +114,8 @@ GEM
     drb (2.2.1)
     erubi (1.13.1)
     execjs (2.10.0)
+    faker (2.21.0)
+      i18n (>= 1.8.11, < 2)
     ffi (1.17.1-x64-mingw-ucrt)
     ffi (1.17.1-x86_64-linux-gnu)
     formatador (1.1.0)
@@ -319,6 +321,7 @@ DEPENDENCIES
   bootstrap-sass (= 3.4.1)
   capybara
   debug
+  faker (= 2.21.0)
   guard (= 2.18.0)
   guard-minitest (= 2.4.6)
   importmap-rails

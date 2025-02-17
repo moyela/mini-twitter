@@ -1,27 +1,22 @@
-<%= form_with(model: user) do |form| %>
-  <% if user.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<%= form_with(model: @user) do |f| %> 
+  <%= render 'shared/error_messages' %> 
 
-      <ul>
-        <% user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
+  <%= f.label :display_name %> 
+  <%= f.text_field :display_name, class: 'form-control' %> 
+
+  <%= f.label :username %>
+  <%= f.text_field :username, class: 'form-control'  %>
+
+  <%= f.label :email %> 
+  <%= f.email_field :email, class: 'form-control'  %> 
+
+  <%= f.label :password %> 
+  <%= f.password_field :password, class: 'form-control'  %> 
+
+  <% if !logged_in? %>
+    <%= f.label :password_confirmation, "Confirmation" %> 
+    <%= f.password_field :password_confirmation, class: 'form-control'  %>
   <% end %>
 
-  <div>
-    <%= form.label :username, style: "display: block" %>
-    <%= form.text_field :username %>
-  </div>
-
-  <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %> 
