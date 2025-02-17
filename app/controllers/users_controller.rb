@@ -26,6 +26,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        reset_session
+        log_in @user
         format.html { redirect_to @user, notice: "You've signed up to Mini-Twitter!" }
       else
         format.html { render :new, status: :unprocessable_entity }
