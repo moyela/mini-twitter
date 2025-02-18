@@ -1,20 +1,22 @@
-User.create!(display_name:  "Wemi Moyela", 
+User.create!(display_name:  "Wemi Moyela (Admin)", 
              username: "moyela",
              email: "wemymoyela@gmail.com", 
+             admin: true,
              password:              "password", 
              password_confirmation: "password") 
  
- 99.times do |n| 
-  display_name = Faker::Name.name 
-  username = display_name[0..10].downcase.gsub(" ", "") + "#{n+1}"
-  email = "example-#{n+1}@railstutorial.org" 
-  password = "password" 
+ 29.times do |n| 
+    
+    display_name = Faker::Name.name 
+    username = display_name[0..10].downcase.gsub(" ", "") + "#{n+1}"
+    email = "example-#{n+1}@railstutorial.org" 
+    password = "password"
 
-  User.create!(display_name: display_name, 
-               username: username,
-               email: email, 
-               password:              password, 
-               password_confirmation: password)
+    User.create!(display_name: display_name, 
+                username: username,
+                email: email,
+                password:              password, 
+                password_confirmation: password)
  end
 
 
