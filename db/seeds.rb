@@ -5,7 +5,7 @@ User.create!(display_name:  "Wemi Moyela (Admin)",
              password:              "password", 
              password_confirmation: "password") 
  
- 29.times do |n| 
+ 99.times do |n| 
     
     display_name = Faker::Name.name 
     username = display_name[0..10].downcase.gsub(" ", "") + "#{n+1}"
@@ -27,13 +27,17 @@ users = User.order(:created_at).take(6)
     users.each { |user| user.tweets.create!(content: content) }
 end
 
+users = User.all
 
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# Create a more random distribution of followers/following
+users.each do |user|
+  # Choose a random number of users to follow (between 0 and all other users)
+  number_of_users_to_follow = rand(0..users.count - 1)
+
+  # Select random users to follow (excluding the current user)
+  users_to_follow = (users - [user]).sample(number_of_users_to_follow)
+
+  users_to_follow.each do |user_to_follow|
+    user.follow(user_to_follow)
+  end
+end

@@ -10,8 +10,13 @@ Rails.application.routes.draw do
   post   "/login",   to: "sessions#create"
   delete "/logout",  to: "sessions#destroy" 
 
-  resources :users
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end 
   resources :tweets, only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
   get '/tweets', to: 'static_pages#home'
 
   get "up" => "rails/health#show", as: :rails_health_check
