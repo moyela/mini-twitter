@@ -18,9 +18,10 @@ class User < ApplicationRecord
                                       uniqueness: true
 
     validates :password, presence: true, length: { minimum: 6 }
-
-    def feed
-        Tweet.where("user_id = ?", id) 
+         
+   # Returns a user's status feed.
+   def feed
+        Tweet.where("user_id IN (?) OR user_id = ?", following_ids, id)
     end 
 
     # Follows a user. 
