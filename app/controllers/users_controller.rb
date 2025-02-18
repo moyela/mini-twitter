@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
+    @tweets = @user.tweets.paginate(page: params[:page]) 
   end
 
   # GET /users/new
@@ -55,14 +56,6 @@ class UsersController < ApplicationController
     User.find(params[:id]).destroy
     flash[:success] = "User deleted"
     redirect_to users_url, status: :see_other
-  end
-
-  def logged_in_user
-    unless logged_in?
-      store_location
-      flash[:danger] = "Please log in."
-      redirect_to login_url, status: :see_other
-    end
   end
 
   def correct_user
